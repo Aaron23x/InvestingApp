@@ -5,7 +5,7 @@ function handleLogin(event) {
     const password = document.getElementById('password').value;
 
     // Send login request to the server
-    fetch('http://localhost:5000/login', {
+    fetch('/api/login', {  // Use the relative path since Vercel handles the full URL for you
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
