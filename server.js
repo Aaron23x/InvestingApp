@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const User = require('./models/User');
+const bodyParser = require('body-parser');
+
 
 
 require('dotenv').config();
@@ -16,7 +18,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 
 const app = express();
-app.use(express.json());
+app.use(bodyParser.json());
 app.use(cors({ origin: 'http://127.0.0.1:5500', methods: ['GET', 'POST'], allowedHeaders: ['Content-Type'] }));
 app.use(express.json());
 
