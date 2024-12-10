@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Data - Finnhub API</title>
+</head>
+<body>
+
+    <h1>Stock Data for AMD</h1>
+    <div id="stock-data"></div>
+    <canvas id="stockChart" width="400" height="200"></canvas>
+
+    <script>
+        // Replace with your Finnhub API key
+        const apiKey = 'cta0hhpr01quh43p0ap0cta0hhpr01quh43p0apg'; // Replace with your actual API key
+        const symbol = 'TSLA'; // You can replace this with any stock symbol
+        const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`;
+
+        async function fetchStockData() {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (data && data.c) {
+                // Extract stock data
+                const stockPrice = data.c; // Current price
+                const highPrice = data.h;   // High price of the day
+                const lowPrice = data.l;    // Low price of the day
+                const openPrice = data.o;   // Open price of the day
+                const prevClosePrice = data.pc; // Previous close price
+
+                // Display stock data
+                document.getElementById('stock-data').innerHTML = `
+                    <p>Symbol: ${symbol}</p>
+                    <p>Current Price: $${stockPrice}</p>
+                    <p>High Price: $${highPrice}</p>
+                    <p>Low Price: $${lowPrice}</p>
+                    <p>Open Price: $${openPrice}</p>
+                    <p>Previous Close: $${prevClosePrice}</p>
+                `;
+
+                // Prepare chart data
+                const chartData = {
+                    labels: ['1', '2', '3', '4', '5'], // Placeholder for date/time labels
+                    datasets: [{
+                        label: `${symbol} Stock Price`,
+                        data: [stockPrice, stockPrice + 1, stockPrice - 1, stockPrice + 0.5, stockPrice - 0.3], // Example price fluctuations
+                        borderColor: '#4CAF50',
+                        backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                        fill: true
+                    }]
+                };
+
+                // Create the chart
+                const ctx = document.getElementById('stockChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        scales: {
+                            x: {
+                                type: 'category',
+                                labels: chartData.labels
+                            },
+                            y: {
+                                beginAtZero: false
+                            }
+                        }
+                    }
+                });
+            } else {
+                console.log('Failed to fetch stock data');
+            }
+        }
+
+        fetchStockData();  // Fetch stock data when the page loads
+    </script>
+
+    <!-- Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</body>
+</html>

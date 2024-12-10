@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Mayhem</title>
+
+    <link rel="shortcut icon" href="./icons/fav.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+
+</head>
+
+<body>
+
+    <header class="header" data-header>
+        <div class="container">
+
+            <a href="index.html" class="logo">
+                <img src="./icons/fav.svg" width="32" height="32" alt="Market Mayhem logo">
+                Market Mayhem
+            </a>
+
+            <nav class="navbar" data-navbar>
+                <ul class="navbar-list">
+
+                    <li class="navbar-item">
+                        <a href="index.html" class="navbar-link" data-nav-link>Homepage</a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a href="portfolio.html" class="navbar-link" data-nav-link>Portfolio</a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a href="#" class="navbar-link" data-nav-link>Community Forum</a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a href="education.html" class="navbar-link" data-nav-link>Education</a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a href="pricing.html" class="navbar-link" data-nav-link>Pricing Plans</a>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <button class="nav-toggle-btn" aria-label="Toggle menu" data-nav-toggler>
+                <span class="line line-1"></span>
+                <span class="line line-2"></span>
+                <span class="line line-3"></span>
+            </button>
+
+            <a href="index.html" class="btn btn-outline">Logout</a>
+
+        </div>
+    </header>
+
+
+    <main>
+        <article>
+
+
+            <section class="section market" aria-label="market update" data-section>
+                <div class="container">
+
+
+                    <div class="title-wrapper">
+                        <h2 class="h2 section-title" id="user-assets-title">[Username]'s Assets </h2>
+                    </div>
+
+
+                    <div class="balance-display">
+                        <h2 id="account-balance">Account Balance: $5000.00</>
+
+                    </div>
+
+                    <!-- <div id="stock-info">
+                        <h2>Stock Info for <span id="stock-symbol">AMD</span></h2>
+                        <p>Current Price: <span id="current-price">$0</span></p>
+                        <p>High Price: <span id="high-price">$0</span></p>
+                        <p>Low Price: <span id="low-price">$0</span></p>
+                        <p>Open Price: <span id="open-price">$0</span></p>
+                        <p>Previous Close: <span id="prev-close-price">$0</span></p>
+                    </div>
+                    
+                    <canvas id="stockChart" width="400" height="200"></canvas> -->
+
+                    <table class="market-table">
+
+                        <thead class="table-head">
+
+                            <tr class="table-row table-title">
+
+                                <th class="table-heading"></th>
+
+                                <th class="table-heading" scope="col">#</th>
+
+                                <th class="table-heading" scope="col">Security</th>
+
+                                <th class="table-heading" scope="col">Current Price</th>
+
+                                <th class="table-heading" scope="col">Percantage</th>
+
+                                <th class="table-heading" scope="col">Quantity / Shares</th>
+
+                                <th class="table-heading" scope="col">Day Change</th>
+
+                                <th class="table-heading" scope="col">Buy / Sell</th>
+
+                                <th class="table-heading"></th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody class="table-body">
+
+                            <tr class="table-row">
+
+                                <td class="table-data">
+                                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
+                                        <ion-icon name="star-outline" aria-hidden="true"
+                                            class="icon-outline"></ion-icon>
+                                        <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
+                                    </button>
+                                </td>
+
+                                <th class="table-data rank" scope="row">1</th>
+
+                                <td class="table-data">
+                                    <div class="wrapper">
+                                        <img src="./assets/images/amd.svg" width="20" height="20" alt="AMD logo"
+                                            class="img">
+
+                                        <h3>
+                                            <a href="#" class="coin-name">Advanced Micro Devices <span
+                                                    class="span">$AMD</span></a>
+                                        </h3>
+                                    </div>
+                                </td>
+
+                                <td class="table-data last-price">$89.36</td>
+
+                                <td class="table-data last-update green">+1.56%</td>
+
+                                <td class="table-data market-cap">
+                                    <span class="quantity-text">135</span>
+                                </td>
+
+
+                                <td class="table-data">
+                                    <img src="./assets/images/chart-1.svg" width="100" height="40" alt="profit chart"
+                                        class="chart">
+                                </td>
+
+                                <td class="table-data">
+                                    <div class="quantity-control">
+                                        <input type="number" min="1" value="1" class="quantity-input"
+                                            aria-label="Quantity to trade">
+                                        <button class="btn btn-buy">Buy</button>
+                                        <button class="btn btn-sell">Sell</button>
+                                    </div>
+                                </td>
+
+                                <td class="table-data">
+                                    <a href="#" class="btn btn-outline" onclick="viewChart('NASDAQ:AMD')">View Chart</a>
+                                </td>
+
+
+                                <div id="chart-container"><button id="close-chart"
+                                        style="position: absolute; top: 10px; right: 10px; z-index: 10; background-color: red; color: white; border: none; padding: 10px 15px;">Close
+                                        Chart</button>
+
+                                    <div id="tradingview-chart"></div>
+                                </div>
+
+
+                            </tr>
+
+                            <tr class="table-row">
+
+                                <td class="table-data">
+                                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
+                                        <ion-icon name="star-outline" aria-hidden="true"
+                                            class="icon-outline"></ion-icon>
+                                        <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
+                                    </button>
+                                </td>
+
+                                <th class="table-data rank" scope="row">2</th>
+
+                                <td class="table-data">
+                                    <div class="wrapper">
+                                        <img src="./assets/images/coin-6.svg" width="20" height="20" alt="Ripple logo"
+                                            class="img">
+
+                                        <h3>
+                                            <a href="#" class="coin-name">Ripple <span class="span">XRP/USD</span></a>
+                                        </h3>
+                                    </div>
+                                </td>
+
+                                <td class="table-data last-price">$0.35</td>
+
+                                <td class="table-data last-update red">-0.12%</td>
+
+                                <td class="table-data market-cap">
+                                    <span class="quantity-text">6858</span>
+                                </td>
+
+                                <td class="table-data">
+                                    <img src="./assets/images/chart-2.svg" width="100" height="40" alt="loss chart"
+                                        class="chart">
+                                </td>
+
+                                <td class="table-data">
+                                    <div class="quantity-control">
+                                        <input type="number" min="1" value="1" class="quantity-input"
+                                            aria-label="Quantity to trade">
+                                        <button class="btn btn-buy">Buy</button>
+                                        <button class="btn btn-sell">Sell</button>
+                                    </div>
+                                </td>
+
+                                <td class="table-data">
+                                    <a href="#" class="btn btn-outline" onclick="viewChart('BINANCE:XRPUSDT')">View
+                                        Chart</a>
+                                </td>
+
+                            </tr>
+
+                            <tr class="table-row">
+
+                                <td class="table-data">
+                                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
+                                        <ion-icon name="star-outline" aria-hidden="true"
+                                            class="icon-outline"></ion-icon>
+                                        <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
+                                    </button>
+                                </td>
+
+                                <th class="table-data rank" scope="row">3</th>
+
+                                <td class="table-data">
+                                    <div class="wrapper">
+                                        <img src="./assets/images/sp500.png" width="30" height="20" alt="SPY logo"
+                                            class="img">
+
+                                        <h3>
+                                            <a href="#" class="coin-name">SPDR S&P 500 ETF <span
+                                                    class="span">$SPY</span></a>
+                                        </h3>
+                                    </div>
+                                </td>
+
+                                <td class="table-data last-price">$346.65</td>
+
+                                <td class="table-data last-update green">+0.32%</td>
+
+                                <td class="table-data market-cap">
+                                    <span class="quantity-text">343</span>
+                                </td>
+
+                                <td class="table-data">
+                                    <img src="./assets/images/chart-1.svg" width="100" height="40" alt="profit chart"
+                                        class="chart">
+                                </td>
+
+                                <td class="table-data">
+                                    <div class="quantity-control">
+                                        <input type="number" min="1" value="1" class="quantity-input"
+                                            aria-label="Quantity to trade">
+                                        <button class="btn btn-buy">Buy</button>
+                                        <button class="btn btn-sell">Sell</button>
+                                    </div>
+                                </td>
+
+                                <td class="table-data">
+                                    <a href="#" class="btn btn-outline" onclick="viewChart('SPY')">View Chart</a>
+                                </td>
+
+                            </tr>
+
+                            <tr class="table-row">
+
+                                <td class="table-data">
+                                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
+                                        <ion-icon name="star-outline" aria-hidden="true"
+                                            class="icon-outline"></ion-icon>
+                                        <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
+                                    </button>
+                                </td>
+
+                                <th class="table-data rank" scope="row">4</th>
+
+                                <td class="table-data">
+                                    <div class="wrapper">
+                                        <img src="./assets/images/coin-4.svg" width="20" height="20" alt="BNB logo"
+                                            class="img">
+
+                                        <h3>
+                                            <a href="#" class="coin-name">BNB <span class="span">BNB/USD</span></a>
+                                        </h3>
+                                    </div>
+                                </td>
+
+                                <td class="table-data last-price">$459.49</td>
+
+                                <td class="table-data last-update red">-1.72%</td>
+
+                                <td class="table-data market-cap">
+                                    <span class="quantity-text">93</span>
+                                </td>
+
+                                <td class="table-data">
+                                    <img src="./assets/images/chart-2.svg" width="100" height="40" alt="loss chart"
+                                        class="chart">
+                                </td>
+
+                                <td class="table-data">
+                                    <div class="quantity-control">
+                                        <input type="number" min="1" value="1" class="quantity-input"
+                                            aria-label="Quantity to trade">
+                                        <button class="btn btn-buy">Buy</button>
+                                        <button class="btn btn-sell">Sell</button>
+                                    </div>
+                                </td>
+
+                                <td class="table-data">
+                                    <a href="#" class="btn btn-outline" onclick="viewChart('BINANCE:BNBUSDT')">View
+                                        Chart</a>
+                                </td>
+
+                            </tr>
+
+                            <tr class="table-row">
+
+                                <td class="table-data">
+                                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
+                                        <ion-icon name="star-outline" aria-hidden="true"
+                                            class="icon-outline"></ion-icon>
+                                        <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
+                                    </button>
+                                </td>
+
+                                <th class="table-data rank" scope="row">5</th>
+
+                                <td class="table-data">
+                                    <div class="wrapper">
+                                        <img src="./assets/images/meta.svg" width="25" height="20" alt="Meta logo"
+                                            class="img">
+
+
+                                        <h3>
+                                            <a href="#" class="coin-name">Meta Platforms<span
+                                                    class="span">$META</span></a>
+                                        </h3>
+                                    </div>
+                                </td>
+
+                                <td class="table-data last-price">$463.53</td>
+
+                                <td class="table-data last-update green">+2.94%</td>
+
+                                <td class="table-data market-cap">
+                                    <span class="quantity-text">204</span>
+                                </td>
+
+                                <td class="table-data">
+                                    <img src="./assets/images/chart-1.svg" width="100" height="40" alt="profit chart"
+                                        class="chart">
+                                </td>
+
+                                <td class="table-data">
+                                    <div class="quantity-control">
+                                        <input type="number" min="1" value="1" class="quantity-input"
+                                            aria-label="Quantity to trade">
+                                        <button class="btn btn-buy">Buy</button>
+                                        <button class="btn btn-sell">Sell</button>
+                                    </div>
+                                </td>
+
+                                <td class="table-data">
+                                    <a href="#" class="btn btn-outline" onclick="viewChart('NASDAQ:META')">View
+                                        Chart</a>
+                                </td>
+
+                            </tr>
+
+                            <tr class="table-row">
+
+                                <td class="table-data">
+                                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
+                                        <ion-icon name="star-outline" aria-hidden="true"
+                                            class="icon-outline"></ion-icon>
+                                        <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
+                                    </button>
+                                </td>
+
+                                <th class="table-data rank" scope="row">6</th>
+
+                                <td class="table-data">
+                                    <div class="wrapper">
+                                        <img src="./assets/images/amazon.svg" width="25" height="20" alt="Amazon logo"
+                                            class="img">
+
+                                        <h3>
+                                            <a href="#" class="coin-name">Amazon <span class="span">$AMZN</span></a>
+                                        </h3>
+                                    </div>
+                                </td>
+
+                                <td class="table-data last-price">$75.79</td>
+
+                                <td class="table-data last-update red">-0.52%</td>
+
+                                <td class="table-data market-cap"><span class="quantity-text">611</span></td>
+
+                                <td class="table-data">
+                                    <img src="./assets/images/chart-2.svg" width="100" height="40" alt="loss chart"
+                                        class="chart">
+                                </td>
+
+                                <td class="table-data">
+                                    <div class="quantity-control">
+                                        <input type="number" min="1" value="1" class="quantity-input"
+                                            aria-label="Quantity to trade">
+                                        <button class="btn btn-buy">Buy</button>
+                                        <button class="btn btn-sell">Sell</button>
+                                    </div>
+                                </td>
+
+                                <td class="table-data">
+                                    <a href="#" class="btn btn-outline" onclick="viewChart('NASDAQ:AMZN')">View
+                                        Chart</a>
+                                </td>
+
+                            </tr>
+
+                            <tr class="table-row">
+
+                                <td class="table-data">
+                                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
+                                        <ion-icon name="star-outline" aria-hidden="true"
+                                            class="icon-outline"></ion-icon>
+                                        <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
+                                    </button>
+                                </td>
+
+                                <th class="table-data rank" scope="row">7</th>
+
+                                <td class="table-data">
+                                    <div class="wrapper">
+                                        <img src="./assets/images/coin-7.svg" width="20" height="20" alt="Cardano logo"
+                                            class="img">
+
+                                        <h3>
+                                            <a href="#" class="coin-name">Cardano <span class="span">ADA</span></a>
+                                        </h3>
+                                    </div>
+                                </td>
+
+                                <td class="table-data last-price">$0.59</td>
+
+                                <td class="table-data last-update green">+1.83%</td>
+
+                                <td class="table-data market-cap">
+                                    <span class="quantity-text">7574</span>
+                                </td>
+
+                                <td class="table-data">
+                                    <img src="./assets/images/chart-1.svg" width="100" height="40" alt="profit chart"
+                                        class="chart">
+                                </td>
+
+                                <td class="table-data">
+                                    <div class="quantity-control">
+                                        <input type="number" min="1" value="1" class="quantity-input"
+                                            aria-label="Quantity to trade">
+                                        <button class="btn btn-buy">Buy</button>
+                                        <button class="btn btn-sell">Sell</button>
+                                    </div>
+                                </td>
+
+                                <!-- Cardano (ADA) -->
+                                <td class="table-data">
+                                    <a href="#" class="btn btn-outline" onclick="viewChart('BINANCE:ADAUSDT')">View
+                                        Chart</a>
+                                </td>
+
+
+                            </tr>
+
+                            <tr class="table-row">
+
+                                <td class="table-data">
+                                    <button class="add-to-fav" aria-label="Add to favourite" data-add-to-fav>
+                                        <ion-icon name="star-outline" aria-hidden="true"
+                                            class="icon-outline"></ion-icon>
+                                        <ion-icon name="star" aria-hidden="true" class="icon-fill"></ion-icon>
+                                    </button>
+                                </td>
+
+                                <th class="table-data rank" scope="row">8</th>
+
+                                <td class="table-data">
+                                    <div class="wrapper">
+                                        <img src="./assets/images/google.svg" width="20" height="20" alt="Google logo"
+                                            class="img">
+
+                                        <h3>
+                                            <a href="#" class="coin-name">Alphabet <span class="span">$GOOGL</span></a>
+                                        </h3>
+                                    </div>
+                                </td>
+
+                                <td class="table-data last-price">$101.87</td>
+
+                                <td class="table-data last-update green">+1.15%</td>
+
+                                <td class="table-data market-cap">
+                                    <span class="quantity-text">232</span>
+                                </td>
+
+                                <td class="table-data">
+                                    <img src="./assets/images/chart-1.svg" width="100" height="40" alt="profit chart"
+                                        class="chart">
+                                </td>
+
+                                <td class="table-data">
+                                    <div class="quantity-control">
+                                        <input type="number" min="1" value="1" class="quantity-input"
+                                            aria-label="Quantity to trade">
+                                        <button class="btn btn-buy">Buy</button>
+                                        <button class="btn btn-sell">Sell</button>
+                                    </div>
+                                </td>
+
+                                <!-- Google (GOOGL) -->
+                                <td class="table-data">
+                                    <a href="#" class="btn btn-outline" onclick="viewChart('NASDAQ:GOOGL')">View
+                                        Chart</a>
+                                </td>
+
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                </div>
+            </section>
+
+        </article>
+    </main>
+
+
+    <footer class="footer">
+
+        <div class="footer-top" data-section>
+            <div class="container">
+
+                <div class="footer-brand">
+
+                    <a href="#" class="logo">
+                        <img src="./icons/fav.svg" width="50" height="50" alt="Market Mayhem logo">
+                        Market Mayhem
+                    </a>
+
+                    <h2 class="footer-title">Connect With Us!</h2>
+
+                    <a href="tel:+123456789101" class="footer-contact-link">+1 234 456 789</a>
+
+                    <a href="mailto:hello.cryptex@gmail.com" class="footer-contact-link">inquiries@marketmayhem.com</a>
+
+                    <address class="footer-contact-link">
+                        Solo Syntax, Fernandina Beach FL 32034
+                    </address>
+
+                </div>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <p class="footer-list-title">Company</p>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">About Us</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Our Team</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Careers</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Blog</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Contact Us</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Privacy Policy</a>
+                    </li>
+
+                </ul>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <p class="footer-list-title">Support</p>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Help Center</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Account Management</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Troubleshooting</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Refunds & Returns</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Security & Privacy</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Customer Service</a>
+                    </li>
+
+                </ul>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <p class="footer-list-title">Resources</p>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Investment Guide</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Research Tools</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">FAQ</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Learning Center</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Market News</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Webinars</a>
+                    </li>
+
+                </ul>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <p class="footer-list-title">Social</p>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">X</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Facebook</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Instagram</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Linkedin</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Youtube</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+
+                <p class="copyright">
+                    &copy; 2024 Market Mayhem All Rights Reserved by <a href="#" class="copyright-link">Solo Syntax</a>
+                </p>
+
+                <ul class="social-list">
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-twitter"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-instagram"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="social-link">
+                            <ion-icon name="logo-linkedin"></ion-icon>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+
+    </footer>
+
+    <script>
+        const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('user-assets-title').textContent = `${username}'s Assets`;
+        } else {
+            document.getElementById('user-assets-title').textContent = "Guest's Assets"; // Fallback for non-logged-in users
+        }
+    </script>
+
+    <script src="./assets/js/script.js" defer></script>
+
+</body>
+
+</html>
