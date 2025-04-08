@@ -1,1 +1,1 @@
-Link To Project: [https://investing-app-iota.vercel.app/](https://finalmayhem.vercel.app/)
+Link To Project: https://finalmayhem.vercel.app/
