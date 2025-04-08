@@ -4,7 +4,6 @@ function handleLogin(event) {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    // Send login request to the server
     fetch('http://localhost:5000/login', {
         method: 'POST',
         headers: {

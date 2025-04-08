@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Market Mayhem</title>
+  <title>Market Mayhem - Education</title>
 
   <link rel="shortcut icon" href="./icons/fav.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./assets/css/style.css">
@@ -43,7 +43,7 @@
           </li>
 
           <li class="navbar-item">
-            <a href="#" class="navbar-link" data-nav-link>Community Forum</a>
+            <a href="communityboard.html" class="navbar-link" data-nav-link>Community Forum</a>
           </li>
 
           <li class="navbar-item">
@@ -63,8 +63,7 @@
         <span class="line line-3"></span>
       </button>
 
-      <!-- <a href="login.html" class="btn btn-outline">Login</a>
-      <a href="signup.html" class="btn btn-outline">Register</a> -->
+      <a href="index.html" class="btn btn-outline" id="logout-btn">Logout</a>
 
     </div>
   </header>
@@ -72,7 +71,6 @@
 
   <main>
     <article>
-
 
       <section class="section trend" aria-label="asset trends" data-section style="padding-top: 25rem;">
         <div class="container">
@@ -107,10 +105,13 @@
                       <div>
                         <p class="text-gray-800 font-medium">1. What is the primary purpose of Bitcoin?</p>
                         <div class="mt-2">
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800" onclick="alert('Correct!')">A.
+                          <button
+                            class="quiz-btn px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all mb-3"
+                            onclick="handleAnswer(true, this)">A.
                             Decentralized Currency</button>
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800 mb-16"
-                            onclick="alert('Incorrect!')">B. Online Shopping Platform</button>
+                          <button
+                            class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all"
+                            onclick="handleAnswer(false, this)">B. Online Shopping Platform</button>
                         </div>
                       </div>
 
@@ -118,10 +119,13 @@
                       <div>
                         <p class="text-gray-800 font-medium">2. What technology powers most cryptocurrencies?</p>
                         <div class="mt-2">
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800" onclick="alert('Correct!')">A.
+                          <button
+                            class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all mb-3"
+                            onclick="handleAnswer(true, this)">A.
                             Blockchain</button>
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800 mb-16"
-                            onclick="alert('Incorrect!')">B. Cloud Computing</button>
+                          <button
+                            class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all"
+                            onclick="handleAnswer(false, this)">B. Cloud Computing</button>
                         </div>
                       </div>
 
@@ -129,10 +133,13 @@
                       <div>
                         <p class="text-gray-800 font-medium">3. What does "HODL" mean in crypto?</p>
                         <div class="mt-2">
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800" onclick="alert('Correct!')">A.
+                          <button
+                            class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all mb-3"
+                            onclick="handleAnswer(true, this)">A.
                             Hold On for Dear Life</button>
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800"
-                            onclick="alert('Incorrect!')">B. High Order Digital Ledger</button>
+                          <button
+                            class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all"
+                            onclick="handleAnswer(false, this)">B. High Order Digital Ledger</button>
                         </div>
                       </div>
                     </div>
@@ -149,10 +156,13 @@
                       <div>
                         <p class="text-gray-800 font-medium">1. What is a dividend?</p>
                         <div class="mt-2">
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800" onclick="alert('Correct!')">A.
+                          <button
+                            class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all mb-3"
+                            onclick="handleAnswer(true, this)">A.
                             Share of Profits</button>
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800 mb-16"
-                            onclick="alert('Incorrect!')">B. Company Debt</button>
+                          <button
+                            class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all"
+                            onclick="handleAnswer(false, this)">B. Company Debt</button>
                         </div>
                       </div>
 
@@ -160,10 +170,13 @@
                       <div>
                         <p class="text-gray-800 font-medium">2. What is an ETF?</p>
                         <div class="mt-2">
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800" onclick="alert('Correct!')">A.
+                          <button
+                            class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all mb-3"
+                            onclick="handleAnswer(true, this)">A.
                             Exchange-Traded Fund</button>
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800 mb-16"
-                            onclick="alert('Incorrect!')">B. Equity Transfer Fee</button>
+                          <button
+                            class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all"
+                            onclick="handleAnswer(false, this)">B. Equity Transfer Fee</button>
                         </div>
                       </div>
 
@@ -171,10 +184,13 @@
                       <div>
                         <p class="text-gray-800 font-medium">3. What does it mean to short a stock?</p>
                         <div class="mt-2">
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800" onclick="alert('Correct!')">A.
+                          <button
+                            class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all mb-3"
+                            onclick="handleAnswer(true, this)">A.
                             Bet on its Decline</button>
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800"
-                            onclick="alert('Incorrect!')">B. Buy and Hold</button>
+                          <button
+                            class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all"
+                            onclick="handleAnswer(false, this)">B. Buy and Hold</button>
                         </div>
                       </div>
                     </div>
@@ -191,10 +207,13 @@
                       <div>
                         <p class="text-gray-800 font-medium">1. What is an option?</p>
                         <div class="mt-2">
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800" onclick="alert('Correct!')">A.
+                          <button
+                            class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all mb-3"
+                            onclick="handleAnswer(true, this)">A.
                             Financial Derivative</button>
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800 mb-16"
-                            onclick="alert('Incorrect!')">B. Stock Purchase</button>
+                          <button
+                            class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all"
+                            onclick="handleAnswer(false, this)">B. Stock Purchase</button>
                         </div>
                       </div>
 
@@ -202,10 +221,13 @@
                       <div>
                         <p class="text-gray-800 font-medium">2. What does ROI stand for?</p>
                         <div class="mt-2">
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800" onclick="alert('Correct!')">A.
+                          <button
+                            class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all mb-3"
+                            onclick="handleAnswer(true, this)">A.
                             Return on Investment</button>
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800 mb-16"
-                            onclick="alert('Incorrect!')">B. Rate of Inflation</button>
+                          <button
+                            class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all"
+                            onclick="handleAnswer(false, this)">B. Rate of Inflation</button>
                         </div>
                       </div>
 
@@ -213,17 +235,20 @@
                       <div>
                         <p class="text-gray-800 font-medium">3. What is a futures contract?</p>
                         <div class="mt-2">
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800" onclick="alert('Correct!')">A.
+                          <button
+                            class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all mb-3"
+                            onclick="handleAnswer(true, this)">A.
                             Agreement to Buy/Sell</button>
-                          <button class="text-2xl text-indigo-600 hover:text-indigo-800"
-                            onclick="alert('Incorrect!')">B. Company Bond</button>
+                          <button
+                            class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-800 rounded-lg shadow-md transition-all"
+                            onclick="handleAnswer(false, this)">B. Company Bond</button>
                         </div>
                       </div>
-
-
                     </div>
+
                   </div>
                 </div>
+                <a href="portfolio.html" onclick="return checkQuizStatus()">Go to Portfolio</a>
               </div>
             </section>
           </div>
@@ -562,19 +587,12 @@
                 <td class="table-data">
                   <button class="btn btn-outline">View Chart</button>
                 </td>
-
               </tr>
-
             </tbody>
-
           </table>
-
         </div>
-
         </div>
       </section>
-
-
     </article>
   </main>
 
@@ -726,7 +744,6 @@
           </li>
 
         </ul>
-
       </div>
     </div>
 
@@ -773,6 +790,67 @@
   <script src="./assets/js/script.js" defer></script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <script>
+
+    // Reset Answered Questions On Reload
+    /*window.onload = function () {
+        localStorage.clear(); // Clear all local storage entries
+    }; */
+
+    window.onload = function () {
+      const now = new Date().getTime();
+      const expirationTime = 30 * 60 * 1000; // 30 minutes in milliseconds
+      const storedTime = localStorage.getItem('quizTimestamp');
+
+      if (storedTime && now - storedTime > expirationTime) {
+        localStorage.clear();
+        console.log('Local storage cleared after 20 minutes.');
+      }
+
+      localStorage.setItem('quizTimestamp', now);
+    };
+
+
+
+    let correctAnswers = 0;
+    const totalQuestions = 9;
+
+    function handleAnswer(isCorrect, button) {
+      if (isCorrect) {
+        alert('Correct!');
+        button.classList.add("bg-green-600");
+        correctAnswers++;
+        button.disabled = true;
+        button.nextElementSibling.disabled = true;
+      } else {
+        alert('Incorrect!');
+        button.classList.add("bg-red-600");
+      }
+
+      if (correctAnswers === totalQuestions) {
+        alert("Congratulations! You have answered all questions correctly.");
+        localStorage.setItem("quizPassed", "true");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("quizPassed") === "true") {
+        alert("You have already completed the quiz.");
+      }
+    });
+  </script>
+
+  <script>
+    function checkQuizStatus() {
+      if (localStorage.getItem("quizPassed") === "true") {
+        return true;
+      } else {
+        alert("You must complete the educational quiz first!");
+        return false;
+      }
+    }
+  </script>
 
 </body>
 

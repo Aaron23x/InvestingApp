@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Market Mayhem</title>
+    <title>Market Mayhem - Pricing</title>
 
     <link rel="shortcut icon" href="./icons/fav.svg" type="image/svg+xml">
     <link rel="stylesheet" href="./assets/css/style.css">
@@ -18,6 +18,10 @@
 
     <!-- Desktop Logo Image -->
     <link rel="icon" href="/static/browser.png">
+
+    <!-- Stripe.JS -->
+    <script src="https://js.stripe.com/v3/"></script>
+
 
 </head>
 
@@ -43,7 +47,7 @@
                     </li>
 
                     <li class="navbar-item">
-                        <a href="#" class="navbar-link" data-nav-link>Community Forum</a>
+                        <a href="communityboard.html" class="navbar-link" data-nav-link>Community Forum</a>
                     </li>
 
                     <li class="navbar-item">
@@ -65,6 +69,7 @@
 
             <!-- <a href="login.html" class="btn btn-outline">Login</a>
             <a href="signup.html" class="btn btn-outline">Register</a> -->
+            <a href="index.html" class="btn btn-outline" id="logout-btn">Logout</a>
 
         </div>
     </header>
@@ -155,9 +160,13 @@
                                                     Community Access
                                                 </li>
                                             </ul>
-                                            <a href="#" aria-describedby="tier-hobby"
+                                            <a id="checkout-button" href="#" aria-describedby="tier-hobby"
                                                 class="mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-blue-400 ring-1 ring-inset ring-blue-400 hover:ring-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400 sm:mt-10">Get
                                                 started today</a>
+
+                                            <!-- <button id="checkout-button">Checkout</button> -->
+
+
                                         </div>
                                         <div
                                             class="relative rounded-3xl bg-gray-900 p-8 shadow-2xl ring-1 ring-gray-900/10 sm:p-10">
@@ -226,8 +235,8 @@
                                                     Historical Data Analysis
                                                 </li>
                                             </ul>
-                                            <a href="#" aria-describedby="tier-enterprise"
-                                                class="mt-8 block rounded-md bg-blue-500 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 sm:mt-10">Get
+                                            <a id="checkout-button-institutional" href="#" aria-describedby="tier-hobby"
+                                                class="mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-blue-400 ring-1 ring-inset ring-blue-400 hover:ring-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400 sm:mt-10">Get
                                                 started today</a>
                                         </div>
 
@@ -806,8 +815,58 @@
     </footer>
 
     <script src="./assets/js/script.js" defer></script>
+    
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+        const stripe = Stripe("pk_test_51Lu5VIBwXI86QYpBXqtzVIbSZK1tvP8gWFJ0LsakCY09bzOtGdkhSV0d7v5zW7ctnKmYqgfim0osZgUWXQChDoho00pITp6u4K");
+
+        document.querySelector("#checkout-button").addEventListener("click", async () => {
+            const response = await fetch("http://localhost:4242/create-checkout-session", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    items: [
+                        { price: "price_1QmlSbBwXI86QYpBF0AniqSM", quantity: 1 }, // Replace with your Stripe Price ID
+                    ],
+                }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json(); // Parse the error response
+                throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorData.error}`);
+            }
+
+
+            const { id: sessionId } = await response.json(); // Extract sessionId correctly
+
+            await stripe.redirectToCheckout({ sessionId });
+        });
+
+        document.querySelector("#checkout-button-institutional").addEventListener("click", async () => {
+            const response = await fetch("http://localhost:4242/create-checkout-session-institutional", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    items: [
+                        { price: "price_1Qmlo2BwXI86QYpBnhhMFTtW", quantity: 1 }, // Replace with your Institutional Price ID
+                    ],
+                }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorData.error}`);
+            }
+
+            const { id: sessionId } = await response.json();
+            await stripe.redirectToCheckout({ sessionId });
+        });
+    </script>
 
 </body>
 

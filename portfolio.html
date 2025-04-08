@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Market Mayhem</title>
+    <title>Market Mayhem - Portfolio</title>
 
     <link rel="shortcut icon" href="./icons/fav.svg" type="image/svg+xml">
     <link rel="stylesheet" href="./assets/css/style.css">
@@ -14,7 +14,19 @@
 
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 
+    <script>
+        window.onload = function () {
+            const quizPassed = localStorage.getItem("quizPassed");
+            if (quizPassed !== "true") {
+                alert("Please complete the quiz before buying stocks.");
+                window.location.href = "education.html";
+            }
+        };
+    </script>
+
 </head>
+
+
 
 <body>
 
@@ -38,7 +50,7 @@
                     </li>
 
                     <li class="navbar-item">
-                        <a href="#" class="navbar-link" data-nav-link>Community Forum</a>
+                        <a href="communityboard.html" class="navbar-link" data-nav-link>Community Forum</a>
                     </li>
 
                     <li class="navbar-item">
@@ -58,18 +70,116 @@
                 <span class="line line-3"></span>
             </button>
 
-            <a href="index.html" class="btn btn-outline">Logout</a>
+            <a href="index.html" class="btn btn-outline" id="logout-btn">Logout</a>
+
 
         </div>
     </header>
 
 
     <main>
+
+        <style>
+            .balance-display {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 1rem;
+            }
+
+            .button-container {
+                display: flex;
+                gap: 10px;
+            }
+
+            .account-action-button {
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .account-action-button:hover {
+                background-color: #45a049;
+            }
+
+            .account-action-button-withdraw {
+                background-color: #ff0000;
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .account-action-button-withdraw:hover {
+                background-color: #c22f2f;
+            }
+
+            .search-container {
+                margin-bottom: 20px;
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            #stock-search {
+                padding: 10px;
+                width: 250px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            #search-button {
+                padding: 10px 15px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            #search-button:hover {
+                background-color: #0056b3;
+            }
+
+            #reset-button {
+                padding: 10px 15px;
+                background-color: #59626d;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            #reset-button:hover {
+                background-color: #313131;
+            }
+
+            #chart-containerr {
+                width: 100%;
+                max-width: 1400px;
+                height: 500px;
+                margin: 20px auto;
+                position: relative;
+                background: #1e1e1e;
+                border-radius: 10px;
+                padding: 15px;
+                overflow: hidden;
+            }
+
+            #tradingview-chart {
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+
         <article>
 
-
             <section class="section market" aria-label="market update" data-section>
-                <div class="container">
+                <div class=" container">
 
 
                     <div class="title-wrapper">
@@ -77,10 +187,56 @@
                     </div>
 
 
+
+
                     <div class="balance-display">
-                        <h2 id="account-balance">Account Balance: $5000.00</>
+                        <h2 id="account-balance">Account Balance: $5000.00</h2>
+
+                        <div class="button-container">
+                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                                <input type="hidden" name="cmd" value="_xclick">
+                                <input type="hidden" name="business" value="ballerrolle@gmail.com">
+                                <input type="hidden" name="item_name" value="Deposit to Brokerage Account">
+                                <input type="hidden" name="currency_code" value="USD">
+                                <input type="hidden" name="amount" id="paypal-deposit-amount">
+                                <button type="submit" id="deposit-button" class="account-action-button">Deposit via
+                                    PayPal</button>
+                            </form>
+
+                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                                <input type="hidden" name="cmd" value="_xclick">
+                                <input type="hidden" name="business" value="ballerrolle@gmail.com">
+                                <input type="hidden" name="item_name" value="Withdraw to Brokerage Account">
+                                <input type="hidden" name="currency_code" value="USD">
+                                <input type="hidden" name="amount" id="paypal-deposit-amount">
+                                <button id="withdraw-button" class="account-action-button-withdraw">Withdraw via
+                                    PayPal</button>
+                            </form>
+
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="search-container">
+                        <input type="text" id="stock-search" placeholder="Search for a stock..."
+                            aria-label="Search for a stock">
+                        <button id="search-button">Search</button>
+                        <a href="portfolio.html" id="reset-button" class="button">Reset</a>
 
                     </div>
+
+                    <!-- TradingView Chart Container -->
+                    <div id="chart-container" style="display: none; margin-top: 220px; height: 100px">
+                        <button id="close-chart"
+                            style="position: absolute; top: 10px; right: 10px; z-index: 10; background-color: red; color: white; border: none; padding: 10px 15px;">
+                            Close Chart
+                        </button>
+                        <div id="tradingview-chart"></div>
+                    </div>
+
+
 
                     <!-- <div id="stock-info">
                         <h2>Stock Info for <span id="stock-symbol">AMD</span></h2>
@@ -767,6 +923,106 @@
     </script>
 
     <script src="./assets/js/script.js" defer></script>
+
+    <script>
+        // Function to update all stock prices
+        function updateAllPrices() {
+            // Select all elements with the class "last-price"
+            const priceElements = document.querySelectorAll(".last-price");
+
+            priceElements.forEach(priceElement => {
+                let currentPrice = parseFloat(priceElement.textContent.replace("$", ""));
+                let priceChange = (Math.random() - 0.5) * 20; // Random change between -10 and +10
+                let newPrice = (currentPrice + priceChange).toFixed(2);
+
+                // Update the text content with the new price
+                priceElement.textContent = `$${newPrice}`;
+            });
+
+            console.log("All stock prices updated!");
+        }
+
+        // Check every minute if it's 9:30 AM and update the prices
+        setInterval(() => {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+
+            if (hours === 9 && minutes === 30) {
+                updateAllPrices();
+            }
+
+            // Testing Real Time Updates
+            /* if (hours === now.getHours() && minutes === now.getMinutes()) {
+               updateAllPrices();
+             } */
+
+        }, 6000); // Check every minute
+
+    </script>
+
+
+    <script>
+        document.getElementById("search-button").addEventListener("click", function () {
+            let searchTerm = document.getElementById("stock-search").value.toUpperCase().trim();
+
+            if (!searchTerm) {
+                alert("Please enter a stock symbol.");
+                return;
+            }
+
+            let found = false;
+            let rows = document.querySelectorAll(".table-body .table-row");
+
+            rows.forEach(row => {
+                let stockName = row.querySelector(".coin-name span").textContent.toUpperCase();
+
+                if (stockName.includes(searchTerm)) {
+                    row.style.display = "";
+                    found = true;
+                } else {
+                    row.style.display = "none";
+                }
+            });
+
+            displayTradingViewChart(searchTerm);
+        });
+
+        document.getElementById("stock-search").addEventListener("keyup", function (event) {
+            if (event.key === "Enter") {
+                document.getElementById("search-button").click();
+            }
+        });
+
+        function displayTradingViewChart(stockSymbol) {
+            document.getElementById("chart-container").style.display = "block";
+            document.getElementById("tradingview-chart").innerHTML = ""; // Clear previous chart
+
+            new TradingView.widget({
+                "width": "100%",
+                "height": 400,
+                "symbol": `NASDAQ:${stockSymbol}`,
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "dark",
+                "style": "1",
+                "locale": "en",
+                "toolbar_bg": "#f1f3f6",
+                "enable_publishing": false,
+                "hide_legend": false,
+                "save_image": false,
+                "container_id": "tradingview-chart"
+            });
+        }
+
+        // Close the chart
+        document.getElementById("close-chart").addEventListener("click", function () {
+            document.getElementById("chart-container").style.display = "none";
+        });
+
+
+    </script>
+
 
 </body>
 
